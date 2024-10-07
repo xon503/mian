@@ -7,8 +7,9 @@
 let
   inherit (inputs) self;
 
+  inherit (builtins) map listToAttrs;
   inherit (lib.lists) optionals singleton concatLists;
-  inherit (lib.attrsets) recursiveUpdate optionalAttrs listToAttrs;
+  inherit (lib.attrsets) recursiveUpdate optionalAttrs;
   inherit (lib.modules) mkDefault evalModules;
 
   /**
@@ -173,7 +174,20 @@ let
         value = mkSystem system;
       }) systems
     );
+
+  mkHomes =
+    user: systems:
+    listToAttrs (
+      map (system: {
+        name = "${user}@${system.host}";
+        value =
+          let
+            type = if system.target == "nixos" then self.nixosConfigurations else self.darwinConfigurations;
+          in
+          type.${system.host}.config.home-manager.users.${user}.home;
+      }) systems
+    );
 in
 {
-  inherit mkSystem mkSystems;
+  inherit mkSystem mkSystems mkHomes;
 }

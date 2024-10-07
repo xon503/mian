@@ -3,7 +3,7 @@ let
   inherit (inputs.self) lib;
 
   inherit (builtins) filter;
-  inherit (lib.builders) mkSystems;
+  inherit (lib.builders) mkSystems mkHomes;
   inherit (lib.lists) concatLists;
 
   # modules
@@ -107,5 +107,8 @@ in
   flake = {
     darwinConfigurations = mkSystems (filter (x: x.target == "darwin") systems);
     nixosConfigurations = mkSystems (filter (x: x.target == "nixos" || x.target == "iso") systems);
+    homeConfigurations = mkHomes "isabel" (
+      filter (x: x.target == "nixos" || x.target == "darwin") systems
+    );
   };
 }
