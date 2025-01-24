@@ -6,19 +6,19 @@
 }:
 let
   inherit (lib.modules) mkDefault;
-  inherit (lib.attrsets) genAttrs;
+  inherit (lib.attrsets) genAttrs attrNames;
   inherit (lib.hardware) ldTernary;
   inherit (lib.validators) ifTheyExist;
+
+  hm = config.home-manager.users;
+  users = attrNames config.garden.system.users;
 in
 {
-  users.users = genAttrs config.garden.system.users (
+  users.users = genAttrs users (
     name:
-    let
-      hm = config.home-manager.users.${name};
-    in
     {
       home = "/" + (ldTernary pkgs "home" "Users") + "/" + name;
-      shell = hm.garden.programs.${hm.garden.programs.defaults.shell}.package;
+      shell = hm.${name}.garden.programs.${hm.${name}.garden.programs.defaults.shell}.package;
     }
     // (ldTernary pkgs {
       uid = mkDefault 1000;

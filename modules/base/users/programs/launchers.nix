@@ -9,7 +9,7 @@ let
   inherit (lib.programs) mkProgram;
 in
 {
-  options.garden.programs = {
+  options.programs = {
     rofi = mkProgram pkgs "rofi" {
       package.default =
         let

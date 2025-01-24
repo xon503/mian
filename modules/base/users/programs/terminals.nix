@@ -9,7 +9,7 @@ let
   inherit (lib.programs) mkProgram;
 in
 {
-  options.garden.programs = {
+  options.programs = {
     wezterm = mkProgram pkgs "wezterm" {
       enable.default = config.garden.programs.gui.enable;
       package.default = inputs'.beapkgs.packages.wezterm;

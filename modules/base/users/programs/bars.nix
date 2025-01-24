@@ -10,7 +10,7 @@ let
   inherit (lib.programs) mkProgram;
 in
 {
-  options.garden.programs = {
+  options.programs = {
     ags = mkProgram pkgs "ags" {
       enable.default =
         (osConfig.garden.environment.desktop == "Hyprland") && config.garden.programs.gui.enable;

@@ -10,7 +10,7 @@ let
   inherit (lib.options) mkOption mkEnableOption;
 in
 {
-  options.garden.programs = {
+  options.programs = {
     zathura = mkProgram pkgs "zathura" { };
 
     discord = mkProgram pkgs "discord" {

@@ -7,7 +7,7 @@ let
   inherit (lib.programs) mkProgram;
 in
 {
-  options.garden.programs = {
+  options.programs = {
     bash = mkProgram pkgs "bash" {
       enable.default = true;
       package.default = pkgs.bashInteractive;

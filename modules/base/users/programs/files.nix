@@ -8,7 +8,7 @@ let
   inherit (lib.programs) mkProgram;
 in
 {
-  options.garden.programs = {
+  options.programs = {
     cosmic-files = mkProgram pkgs "cosmic-files" {
       enable.default = config.garden.programs.gui.enable;
     };

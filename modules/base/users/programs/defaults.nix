@@ -5,7 +5,7 @@ let
   inherit (lib.hardware) ldTernary;
 in
 {
-  options.garden.programs.defaults = {
+  options.programs.defaults = {
     shell = mkOption {
       type = enum [
         "bash"

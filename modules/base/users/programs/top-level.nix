@@ -6,7 +6,7 @@ let
 in
 {
   # these are options that will cause a mass rebuild by enabling multiple packages
-  options.garden.programs = {
+  options.programs = {
     cli = {
       enable = mkEnableOption "Enable CLI programs" // {
         default = true;

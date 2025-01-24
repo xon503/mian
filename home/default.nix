@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   self,
   self',
   config,
@@ -9,8 +8,7 @@
   ...
 }:
 let
-  inherit (lib.modules) mkDefault;
-  inherit (lib.attrsets) genAttrs;
+  inherit (lib.attrsets) mapAttrs;
 in
 {
   home-manager = {
@@ -21,31 +19,20 @@ in
 
     extraSpecialArgs = {
       inherit
-        inputs
         self
-        inputs'
         self'
+        inputs
+        inputs'
         ;
     };
 
-    users = genAttrs config.garden.system.users (name: ./${name});
+    users = mapAttrs (name: _: ./${name}) config.garden.system.users;
 
     # we should define grauntied common modules here
     sharedModules = [
       inputs.beapkgs.homeManagerModules.default
 
       ./base/default.nix
-
-      {
-        home.stateVersion =
-          if pkgs.stdenv.hostPlatform.isDarwin then "23.11" else config.system.stateVersion;
-
-        # reload system units when changing configs
-        systemd.user.startServices = mkDefault "sd-switch"; # or "legacy" if "sd-switch" breaks again
-
-        # let HM manage itself when in standalone mode
-        programs.home-manager.enable = true;
-      }
     ];
   };
 }

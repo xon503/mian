@@ -1,15 +1,14 @@
 { lib, config, ... }:
 let
   inherit (lib.lists) map any;
+  inherit (lib.attrsets) attrNames;
   inherit (lib.trivial) id;
   inherit (lib.options) mkOption;
   inherit (lib.types) bool;
 
-  inherit (config.garden.system) users;
+  users = attrNames config.garden.system.users;
 
-  isAllowed =
-    item: any id (map (user: config.home-manager.users.${user}.garden.programs.${item}.enable) users);
-
+  isAllowed = item: any id (map (user: config.garden.users.${user}.programs.${item}.enable) users);
 in
 {
   options.garden.meta = {

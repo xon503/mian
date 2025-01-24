@@ -11,7 +11,7 @@ let
   inherit (lib.meta) getExe;
 in
 {
-  options.garden.programs = {
+  options.programs = {
     vscode = mkProgram pkgs "vscode" { };
     zed = mkProgram pkgs "zed-editor" { };
     micro = mkProgram pkgs "micro" { };

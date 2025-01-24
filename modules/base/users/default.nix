@@ -1,8 +1,9 @@
+# This may be the abstraction of the centry
 {
   imports = [
-    ./isabel.nix
+    ./overrides
+
     ./mkusers.nix
     ./options.nix
-    ./root.nix
   ];
 }
