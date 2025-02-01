@@ -53,6 +53,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # disko, declarative disk management
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # we can use this to provide overridable systems
     systems = {
       type = "github";
@@ -68,6 +74,7 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
+    # lets make our host setup a bit easier
     easy-hosts = {
       type = "github";
       owner = "tgirlcloud";
