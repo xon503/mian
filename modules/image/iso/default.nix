@@ -3,13 +3,10 @@
 # https://github.com/NixOS/nixpkgs/blob/90a153e81e7deb0b2ea1466c8a2f515df1974717/nixos/modules/profiles/installation-device.nix#L32
 {
   imports = [
+    ./base.nix # the base iso image
     ./boot.nix # boot settings
-    ./console.nix # tty configurations
     ./fixes.nix # fixes issues
-    ./image.nix # the iso image and its configuration
-    ./networking.nix # all access to the outside
-    ./nix.nix # nix the package manager configurations
+    ./iso.nix # the iso image and its configuration
     ./programs.nix # programs that we will need to make our NixOS install
-    ./space.nix # ways that we save valuable space on the iso
   ];
 }
