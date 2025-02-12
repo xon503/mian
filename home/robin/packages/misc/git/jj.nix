@@ -19,10 +19,19 @@ in
 
         ui = {
           default-command = "status";
+          diff-editor = "nvim";
         };
 
         template-aliases = {
           "format_short_signature(signature)" = "signature.email().local()";
+        };
+
+        merge-tools.nvim = {
+          edit-args = [
+            "-d"
+            "$left"
+            "$right"
+          ];
         };
       };
     };
