@@ -124,10 +124,7 @@ in
       golang = ss "" "blue";
       docker_context = ss " " "blue";
 
-      nix_shell = {
-        symbol = "@devshell";
-        format = "[$symbol ](blue)";
-      };
+      nix_shell = ss "@devshell" "blue";
 
       git_branch = {
         symbol = "󰘬 ";
