@@ -10,9 +10,13 @@ in
     inherit (cfg) package;
 
     autosuggestion.enable = true;
-    # enableCompletion = true;
+    enableCompletion = true;
     syntaxHighlighting.enable = true;
 
-    dotDir = ".config/zsh";
+    dotDir = config.xdg.configHome + "/zsh";
+
+    history = {
+      path = config.xdg.stateHome + "/zsh/history";
+    };
   };
 }
