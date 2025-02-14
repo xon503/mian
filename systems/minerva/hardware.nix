@@ -1,22 +1,79 @@
 {
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-uuid/77a90bab-9a6f-4cf0-8493-7db518b9214a";
-      fsType = "ext4";
-    };
+  disko.devices = {
+    disk = {
+      sda = {
+        type = "disk";
+        device = "/dev/sda";
+        content = {
+          type = "gpt";
+          partitions = {
+            boot = {
+              name = "boot";
+              size = "1M";
+              type = "EF02";
+            };
+            esp = {
+              name = "ESP";
+              size = "256M";
+              type = "EF00";
+              content = {
+                type = "filesystem";
+                format = "vfat";
+                mountpoint = "/efi";
+                mountOptions = [
+                  "fmask=0077"
+                  "dmask=0077"
+                ];
+              };
+            };
+            root = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/";
+              };
+            };
+          };
+        };
+      };
 
-    "/efi" = {
-      device = "/dev/disk/by-uuid/88C6-A9EA";
-      fsType = "vfat";
-      options = [
-        "fmask=0077"
-        "dmask=0077"
-      ];
-    };
+      sdb = {
+        type = "disk";
+        device = "/dev/sdb";
+        content = {
+          type = "gpt";
+          partitions = {
+            storage = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/srv/storage";
+              };
+            };
+          };
+        };
+      };
 
-    "/srv/storage" = {
-      device = "/dev/disk/by-uuid/157ffe4f-f8f9-4d20-b2e1-3dc144941729";
-      fsType = "ext4";
+      swap = {
+        type = "disk";
+        device = "/dev/zram0";
+        content = {
+          type = "gpt";
+          partitions = {
+            swap = {
+              size = "100%";
+              content = {
+                type = "swap";
+                discardPolicy = "both";
+                # resume from hibernation from this device
+                resumeDevice = true;
+              };
+            };
+          };
+        };
+      };
     };
   };
 }
