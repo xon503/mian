@@ -124,14 +124,14 @@ in
       golang = ss "" "blue";
       docker_context = ss " " "blue";
 
-      nix_shell = ssv " " "blue";
+      nix_shell = ss "@devshell" "blue";
 
       git_branch = {
         symbol = "󰘬 ";
-        format = "on [$branch]($style) ";
+        format = "[$symbol $branch]($style) ";
         truncation_length = 4;
         truncation_symbol = "…/";
-        style = "green";
+        style = "purple";
       };
       git_status = {
         format = "[$all_status$ahead_behind]($style) ";
@@ -147,6 +147,7 @@ in
         staged = "[++\\($count\\)](green)";
         renamed = " ";
         deleted = " ";
+        disabled = true;
       };
 
       battery.disabled = true;
